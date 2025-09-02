@@ -33,12 +33,19 @@ body {
 }
 
 @keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: Poppins, sans-serif;
   margin: 0 0 0.5rem;
   background: var(--gradient);
@@ -46,17 +53,21 @@ h1, h2 {
   -webkit-text-fill-color: transparent;
 }
 
-.container, section, form {
+.container,
+section,
+form {
   background: var(--card);
   border-radius: 16px;
   padding: 24px;
   margin: 20px auto;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
 }
 
 /* Inputs */
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--border);
@@ -65,14 +76,17 @@ input, textarea, select {
   font-size: 1rem;
   transition: all 0.2s ease;
 }
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border-color: #7c3aed;
   outline: none;
   box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
 }
 
 /* Buttons */
-button, .btn {
+button,
+.btn {
   display: inline-block;
   background: var(--gradient);
   color: #fff;
@@ -83,25 +97,42 @@ button, .btn {
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Add accessible focus styles for buttons/links */
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
 }
 
 /* Nav */
 nav {
   margin-top: 20px;
+  /* Improve layout and spacing for nav items */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
 }
+/* Improve contrast inside white card: use dark text for nav links */
 nav a {
-  color: #fff;
+  color: var(--text);
   font-weight: 600;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 nav a:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 /* Seat Map */
@@ -125,9 +156,19 @@ nav a:hover {
 .seat:hover {
   transform: scale(1.05);
 }
-.seat.available { background: #ecfdf5; color: #065f46; }
-.seat.booked { background: #fee2e2; color: #7f1d1d; cursor: not-allowed; }
-.seat.selected { background: #dbeafe; color: #1e3a8a; }
+.seat.available {
+  background: #ecfdf5;
+  color: #065f46;
+}
+.seat.booked {
+  background: #fee2e2;
+  color: #7f1d1d;
+  cursor: not-allowed;
+}
+.seat.selected {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
 
 /* Admin cards */
 #teamsList > div {
@@ -135,5 +176,96 @@ nav a:hover {
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================== */
+/*          HERO POLISH            */
+/* =============================== */
+
+/* Create a readable hero card over the moving gradient */
+.hero {
+  width: 100%;
+  max-width: 1200px;
+  padding: 24px;
+  background: transparent; /* Keep ambient gradient from body */
+}
+
+.hero-content {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 28px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.25); /* subtle dark glass for contrast on bright gradient */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Ensure strong text contrast in hero (override gradient-filled headings) */
+.hero h1,
+.hero h2 {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.1;
+}
+.hero p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  margin-top: 0.75rem;
+}
+
+/* Better button layout in hero */
+.hero-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Add a secondary button style that contrasts on the hero */
+.btn-secondary {
+  background:#7c3aed;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  padding: 10px 16px;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+/* =============================== */
+/*       HOME SECTION POLISH       */
+/* =============================== */
+
+/* Constrain width and spacing for the home actions card */
+.home-actions {
+  width: 100%;
+  max-width: 960px;
+}
+
+/* Tweak paragraph spacing and link grouping */
+.home-actions p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =============================== */
+/*           RESPONSIVE            */
+/* =============================== */
+@media (min-width: 768px) {
+  .hero-content {
+    padding: 56px 48px;
+  }
 }

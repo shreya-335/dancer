@@ -16,7 +16,21 @@ async function register(){
   const res = await fetch("/api/register", {method:"POST", headers:{"Content-Type":"application/json"},
     body: JSON.stringify({name, email, password, phone})});
   const j = await res.json();
-  alert(j.message || j.status);
+  if(j.status==="success"){
+    // Immediately log in after successful registration
+    const lr = await fetch("/api/login", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({email, password})});
+    const lj = await lr.json();
+    if(lj.status==="success"){
+      saveUser({user_id:lj.user_id, name:lj.name, is_admin:lj.is_admin});
+      // Redirect to home
+      window.location.href = "/";
+    } else {
+      alert("Registered but auto-login failed: " + (lj.message||""));
+    }
+  } else {
+    alert(j.message || j.status);
+  }
 }
 
 // Login
@@ -28,7 +42,8 @@ async function login(){
   const j = await res.json();
   if(j.status==="success"){
     saveUser({user_id:j.user_id, name:j.name, is_admin:j.is_admin});
-    alert("Logged in");
+    // Redirect to home after login
+    window.location.href = "/";
   } else {
     alert(j.message || "Login failed");
   }

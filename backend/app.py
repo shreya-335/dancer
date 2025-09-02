@@ -36,6 +36,15 @@ def team_register_page():
 def admin_page():
     return render_template("admin.html")
 
+# New separated auth pages
+@app.route("/login")
+def login_page():
+    return render_template("login.html")
+
+@app.route("/register")
+def register_page():
+    return render_template("register.html")
+
 
 # --- API: auth & users ---
 @app.route("/api/register", methods=["POST"])
@@ -63,6 +72,8 @@ def login():
     user = User.query.filter_by(email=email).first()
     if not user or not check_password_hash(user.password_hash, password):
         return jsonify({"status":"error", "message":"Invalid credentials"}), 401
+    # Log successful logins to backend terminal
+    print(f"[LOGIN] User {user.id} - {user.email} logged in at {datetime.utcnow().isoformat()}.")
     return jsonify({"status":"success", "user_id":user.id, "name": user.name, "is_admin": user.is_admin})
 
 # --- API: seats & booking ---
