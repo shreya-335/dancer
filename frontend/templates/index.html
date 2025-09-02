@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dance Competition - Home</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <h1>Dance Competition Booking</h1>
+
+  <section id="auth">
+    <h2>Login</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <h2>Register</h2>
+    <input id="regName" placeholder="Name">
+    <input id="regEmail" placeholder="Email">
+    <input id="regPhone" placeholder="Phone">
+    <input id="regPassword" type="password" placeholder="Password">
+    <button onclick="register()">Register</button>
+  </section>
+
+  <hr>
+  <nav>
+    <a href="/seats">Book Seats</a> |
+    <a href="/team-register">Team Registration</a> |
+    <a href="/admin">Admin</a>
+  </nav>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Team Registration</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <h1>Team Registration</h1>
+  <form id="teamForm" onsubmit="submitTeam(event)">
+    <input id="teamName" placeholder="Team Name" required><br>
+    <input id="leaderName" placeholder="Leader Name" required><br>
+    <input id="leaderEmail" placeholder="Leader Email" required><br>
+    <textarea id="members" placeholder="Members (comma separated)" rows="4"></textarea><br>
+    <select id="category">
+      <option>Category A</option>
+      <option>Category B</option>
+    </select><br>
+    <button type="submit">Register Team</button>
+  </form>
+  <script src="/static/js/teams.js"></script>
+</body>
+</html>

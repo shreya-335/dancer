@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Seat Booking</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <h1>Seat Map</h1>
+  <div>
+    <span id="userDisplay"></span>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <div id="seatMap" class="seat-grid"></div>
+  <div>
+    <button id="bookBtn" onclick="bookSelected()">Book Selected Seat</button>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/seats.js"></script>
+</body>
+</html>
