@@ -13,13 +13,19 @@ async function register(){
   const email=document.getElementById("regEmail").value;
   const phone=document.getElementById("regPhone").value;
   const password=document.getElementById("regPassword").value;
-  const res = await fetch("/api/register", {method:"POST", headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({name, email, password, phone})});
+
+  const res = await fetch(backendUrl + "/api/register", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({name, email, password, phone})
+  });
   const j = await res.json();
+
   if(j.status==="success"){
     // Immediately log in after successful registration
-    const lr = await fetch("/api/login", {method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({email, password})});
+    const lr = await fetch(backendUrl + "/api/login", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({email, password})
+    });
     const lj = await lr.json();
     if(lj.status==="success"){
       saveUser({user_id:lj.user_id, name:lj.name, is_admin:lj.is_admin});
@@ -37,9 +43,13 @@ async function register(){
 async function login(){
   const email=document.getElementById("loginEmail").value;
   const password=document.getElementById("loginPassword").value;
-  const res = await fetch("/api/login", {method:"POST", headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({email, password})});
+
+  const res = await fetch(backendUrl + "/api/login", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({email, password})
+  });
   const j = await res.json();
+
   if(j.status==="success"){
     saveUser({user_id:j.user_id, name:j.name, is_admin:j.is_admin});
     // Redirect to home after login
@@ -48,6 +58,7 @@ async function login(){
     alert(j.message || "Login failed");
   }
 }
+
 function logout(){ localStorage.removeItem("dc_user"); updateUserDisplay(); alert("Logged out"); }
 
 document.addEventListener("DOMContentLoaded", updateUserDisplay);

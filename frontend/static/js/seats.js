@@ -2,7 +2,7 @@ let seats = [];
 let selectedSeat = null;
 
 async function loadSeats(){
-  const res = await fetch("/api/seats");
+  const res = await fetch(backendUrl + "/api/seats");
   seats = await res.json();
   renderSeats();
 }
@@ -34,8 +34,11 @@ async function bookSelected(){
   const user = JSON.parse(localStorage.getItem("dc_user") || "null");
   if(!user) return alert("Please login first");
   if(!selectedSeat) return alert("Select a seat first");
-  const res = await fetch("/api/book", {method:"POST", headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({user_id: user.user_id, seat_code: selectedSeat})});
+
+  const res = await fetch(backendUrl + "/api/book", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({user_id: user.user_id, seat_code: selectedSeat})
+  });
   const j = await res.json();
   alert(j.message || j.status);
   if(j.status === "success") loadSeats();
